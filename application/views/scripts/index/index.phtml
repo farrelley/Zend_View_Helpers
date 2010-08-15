@@ -1,0 +1,24 @@
+<h1>Lorem Ipsum View Helper</h1>
+<h2>Usage</h2>
+<p>This is good for generating text on the fly for display purposes when real content is not available.</p>
+<p>Pass the following options via an array<br /><br />
+	<code>
+		type: can be paras, words, bytes, lists<br />
+		count: integer specifies the number of paragraphs, words, bytes and lists<br />
+		start: yes or no.  should the text start with Lorem Ipsum...<br />
+		list: for lists only. Specifies the type of list ol or ul
+	</code>
+</p>
+
+<h2>Examples</h2>
+<h3>Paragraph</h3>
+<?php echo $this->loremIpsum(array('type' => 'paras')); ?>
+
+<h3>Words</h3>
+<?php echo $this->loremIpsum(array('type' => 'words')); ?>
+
+<h3>Bytes</h3>
+<?php echo $this->loremIpsum(array('type' => 'bytes')); ?>
+
+<h3>Lists</h3>
+<?php echo $this->loremIpsum(array('type' => 'lists')); ?>
