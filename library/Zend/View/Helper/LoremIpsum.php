@@ -20,7 +20,9 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
+require_once 'Zend/Http/Client.php';
 require_once 'Zend/Json.php';
+
 /**
  * Helper for adding filler text (Lorem Ipsum)
  *
@@ -31,19 +33,46 @@ require_once 'Zend/Json.php';
  */
 class Zend_View_Helper_LoremIpsum extends Zend_View_Helper_Abstract
 {
+	/**
+	 * Lipson JSON URI
+	 */
 	CONST URI = "http://www.lipsum.com/feed/json";
+	
+	/**
+	 * Default Count
+	 */
 	CONST COUNT = 5;
+	
+	/**
+	 * Default staring with Lorem Ipsum....
+	 */
 	CONST START = "yes"; 
+	
+	/**
+	 * Default List Type
+	 */
 	CONST LIST_TYPE = "ul";
 	
+	/**
+	 * Zend_Http_Client
+	 */
 	protected $_localHttpClient;
 	
+	/**
+	 * Setup http client
+	 * @return void
+	 */
 	public function __construct() 
 	{
 		$this->_localHttpClient = new Zend_Http_Client();
 		$this->_localHttpClient->setUri(self::URI);
 	}
 	
+	/**
+	 * View helper.  Route to correct helper via options.
+	 * default to paragraph
+	 * @return string
+	 */
 	public function loremIpsum(array $options) 
 	{
 		switch($options['type']) {
@@ -62,6 +91,10 @@ class Zend_View_Helper_LoremIpsum extends Zend_View_Helper_Abstract
 		}
 	}
 	
+	/**
+	 * Validate count to make sure it's set. 
+	 * @return string
+	 */
 	protected function _validateCount($count)
 	{
 		if (is_numeric($count) && isset($count)) {
@@ -71,6 +104,10 @@ class Zend_View_Helper_LoremIpsum extends Zend_View_Helper_Abstract
 		}
 	}
 	
+	/**
+	 * Validate Start to make sure it's set
+	 * @return string
+	 */
 	protected function _validateStart($start)
 	{
 		if (isset($start) && ("yes" === $start || "no" === $start)) {
@@ -80,6 +117,10 @@ class Zend_View_Helper_LoremIpsum extends Zend_View_Helper_Abstract
 		}
 	}
 	
+	/**
+	 * Validate list type to make sure it's set
+	 * @return string
+	 */
 	protected function _validateListType($type) 
 	{
 		if (isset($type) && in_array($type, array('ul', 'ol'))) {
@@ -92,6 +133,7 @@ class Zend_View_Helper_LoremIpsum extends Zend_View_Helper_Abstract
 	/**
 	 * Generate Paragraphs
 	 * @param array $options
+	 * @return string 
 	 */
 	protected function _paragraph(array $options)
 	{
@@ -109,6 +151,7 @@ class Zend_View_Helper_LoremIpsum extends Zend_View_Helper_Abstract
 	/**
 	 * Generate words
 	 * @param array $options
+	 * @return string
 	 */
 	protected function _words(array $options)
 	{
@@ -143,6 +186,7 @@ class Zend_View_Helper_LoremIpsum extends Zend_View_Helper_Abstract
 	/**
 	 * Gernerate UL or OL lists
 	 * @param array $options
+	 * @return string
 	 */
 	protected function _lists(array $options)
 	{
