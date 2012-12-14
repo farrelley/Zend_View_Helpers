@@ -75,6 +75,15 @@ class Zend_View_Helper_LoremIpsum extends Zend_View_Helper_Abstract
 	 */
 	public function loremIpsum(array $options) 
 	{
+		
+		/**
+		 * Adicionando validacao para valores evitar index not found
+		 */
+		
+		$options['type'] = isset($options['type'])?$options['type']:null;
+		$options['count'] = isset($options['count'])?$options['count']:null;
+		$options['start'] = isset($options['start'])?$options['start']:null;
+		
 		switch($options['type']) {
 			case "words":
 				return $this->_words($options);
